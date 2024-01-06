@@ -1,0 +1,17 @@
+[package]
+name = "gstreamer-klv-test"
+version = "0.1.0"
+authors = ["Andres Vahter <andres@vahter.me>"]
+edition = "2021"
+
+[dependencies]
+log = "0.4"
+env_logger = "0.10"
+anyhow = "1.0"
+gstreamer = "0.21.2"
+gstreamer-video = "0.21.2"
+gstreamer-app = "0.21.2"
+derive_more = "0.99.5"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+cocoa = "0.25"
