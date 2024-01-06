@@ -1,0 +1,85 @@
+[2024-01-06T12:09:48.698Z INFO  gstreamer_klv_test] start
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] Event Event { ptr: 0x600003eccaf0, type: "stream-start", seqnum: Seqnum(68), structure: Some(GstEventStreamStart { stream-id: (gchararray) "0d49adabb8368d1d6fddcdb6caf78724", flags: (GstStreamFlags) ((GstStreamFlags) GST_STREAM_FLAG_NONE), group-id: (guint) 2 }) }
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstOSXVideoSink:osxvideosink0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstVideoConvert:videoconvert0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/avdec_h264:avdec_h264-0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstH264Parse:h264parse1"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstTSDemux:tsdemux0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstMpegTsMux:mpegtsmux0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstH264Parse:h264parse0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstCapsFilter:capsfilter0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstX264Enc:x264enc0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAppSrc:appsrc0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAVFVideoSrc:avfvideosrc0"): Null -> Ready (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0"): Null -> Ready (Playing)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstVideoConvert:videoconvert0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/avdec_h264:avdec_h264-0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstH264Parse:h264parse1"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstTSDemux:tsdemux0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstMpegTsMux:mpegtsmux0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstH264Parse:h264parse0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstCapsFilter:capsfilter0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstX264Enc:x264enc0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAppSrc:appsrc0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAVFVideoSrc:avfvideosrc0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0"): Ready -> Paused (Playing)
+[2024-01-06T12:09:49.148Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstVideoConvert:videoconvert0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/avdec_h264:avdec_h264-0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstH264Parse:h264parse1"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstTSDemux:tsdemux0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstMpegTsMux:mpegtsmux0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstH264Parse:h264parse0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstCapsFilter:capsfilter0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstX264Enc:x264enc0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAppSrc:appsrc0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.149Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAVFVideoSrc:avfvideosrc0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.218Z INFO  gstreamer_klv_test] Event Event { ptr: 0x600003ef5500, type: "caps", seqnum: Seqnum(81), structure: Some(GstEventCaps { caps: (GstCaps) video/x-raw, width=(int)1920, height=(int)1080, framerate=(fraction)30/1, format=(string)NV12 }) }
+[2024-01-06T12:09:49.641Z INFO  gstreamer_klv_test] Event Event { ptr: 0x600003ec82a0, type: "segment", seqnum: Seqnum(63), structure: Some(GstEventSegment { segment: (GstSegment) ((GstSegment*) 0x600003bc5d00) }) }
+[2024-01-06T12:09:49.641Z WARN  gstreamer_klv_test] frame Some(0:00:00.471794232) 660.549
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] frame Some(0:00:00.502026829) 13.259
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] connect new video pad video_0_0041 from tsdemux0
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] connect new metadata pad private_0_0042 from tsdemux0
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstQueue:queue0"): Null -> Ready (Playing)
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstQueue:queue0"): Ready -> Paused (Playing)
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstQueue:queue0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAppSink:appsink0"): Null -> Ready (Playing)
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAppSink:appsink0"): Ready -> Paused (Playing)
+[2024-01-06T12:09:49.655Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstAppSink:appsink0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.668Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:49.691Z WARN  gstreamer_klv_test] frame Some(0:00:00.534427576) 36.06
+[2024-01-06T12:09:49.694Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstOSXVideoSink:osxvideosink0"): Ready -> Paused (VoidPending)
+[2024-01-06T12:09:49.694Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0/GstOSXVideoSink:osxvideosink0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.694Z INFO  gstreamer_klv_test] State changed from Some("/GstPipeline:pipeline0"): Paused -> Playing (VoidPending)
+[2024-01-06T12:09:49.717Z INFO  gstreamer_klv_test] frame Some(0:00:00.566593585) 26.396
+[2024-01-06T12:09:49.751Z INFO  gstreamer_klv_test] frame Some(0:00:00.600627285) 33.745
+[2024-01-06T12:09:50.044Z WARN  gstreamer_klv_test] frame Some(0:00:00.831860868) 292.877
+[2024-01-06T12:09:50.070Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.070Z INFO  gstreamer_klv_test] frame Some(0:00:00.865761043) 26.548
+[2024-01-06T12:09:50.106Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.107Z WARN  gstreamer_klv_test] frame Some(0:00:00.898527666) 36.265
+[2024-01-06T12:09:50.137Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.137Z INFO  gstreamer_klv_test] frame Some(0:00:00.932468531) 30.493
+[2024-01-06T12:09:50.172Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.172Z WARN  gstreamer_klv_test] frame Some(0:00:00.965328107) 35.357
+[2024-01-06T12:09:50.405Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.405Z WARN  gstreamer_klv_test] frame Some(0:00:01.198094526) 232.809
+[2024-01-06T12:09:50.435Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.435Z INFO  gstreamer_klv_test] frame Some(0:00:01.231161169) 30.306
+[2024-01-06T12:09:50.469Z INFO  gstreamer_klv_test] frame Some(0:00:01.264661394) 33.504
+[2024-01-06T12:09:50.469Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.503Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.503Z INFO  gstreamer_klv_test] frame Some(0:00:01.297627334) 33.943
+[2024-01-06T12:09:50.537Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.538Z INFO  gstreamer_klv_test] frame Some(0:00:01.331426894) 34.601
+[2024-01-06T12:09:50.770Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.770Z WARN  gstreamer_klv_test] frame Some(0:00:01.564194189) 232.373
+[2024-01-06T12:09:50.804Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.804Z INFO  gstreamer_klv_test] frame Some(0:00:01.597960974) 34.301
+[2024-01-06T12:09:50.836Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.837Z INFO  gstreamer_klv_test] frame Some(0:00:01.630827129) 32.387
+[2024-01-06T12:09:50.870Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.870Z INFO  gstreamer_klv_test] frame Some(0:00:01.664661113) 33.243
+[2024-01-06T12:09:50.904Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:50.904Z INFO  gstreamer_klv_test] frame Some(0:00:01.697427342) 33.94
+[2024-01-06T12:09:51.137Z INFO  gstreamer_klv_test::klv] receive klv [42, 2, 0, 3]
+[2024-01-06T12:09:51.137Z WARN  gstreamer_klv_test] frame Some(0:00:01.931227186) 233.288
