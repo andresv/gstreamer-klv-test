@@ -17,4 +17,4 @@ RUST_LOG=info cargo run --release
 
 ## Issues
 
-* From [log.txt](log.txt) can be seen that every 5th frame takes 233 ms instead of 33 ms as it should. What is causing it?
+* [FIXED]: From [log.txt](log.txt) can be seen that every 5th frame takes 233 ms instead of 33 ms as it should. What is causing it?

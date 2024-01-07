@@ -36,6 +36,7 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
     let avdec_h264 = gst::ElementFactory::make("avdec_h264").build().unwrap();
     let videoconvert = gst::ElementFactory::make("videoconvert").build().unwrap();
     let videosink = gst::ElementFactory::make("osxvideosink").build().unwrap();
+    videosink.set_property_from_str("sync", "false");
 
     let appsrc = klv::klv_test_src().unwrap();
     let appsink = klv::klv_sink().unwrap();
