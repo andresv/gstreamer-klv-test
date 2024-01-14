@@ -39,31 +39,5 @@ pub fn klv_test_src() -> Result<gst::Element> {
         .caps(&Caps::builder("meta/x-klv").field("parsed", true).build())
         .format(gst::Format::Time)
         .build();
-
-    // This is not needed, actually data is generated in frame callback.
-
-    // let mut i = 0;
-    // appsrc.set_callbacks(
-    //     gst_app::AppSrcCallbacks::builder()
-    //         .need_data(move |appsrc, _| {
-    //             let data = [0x2A, 0x02, 0x00, 0x03];
-
-    //             let mut buffer = gst::Buffer::with_size(data.len()).unwrap();
-    //             {
-    //                 let bufref = buffer.make_mut();
-    //                 bufref.set_pts(i * 500 * gst::ClockTime::MSECOND);
-    //                 let mut mw = bufref.map_writable().unwrap();
-    //                 mw.as_mut_slice().copy_from_slice(&data)
-    //             }
-
-    //             info!("sending buffer: {}", i);
-    //             i += 1;
-
-    //             // appsrc already handles the error here for us.
-    //             let _ = appsrc.push_buffer(buffer);
-    //         })
-    //         .build(),
-    // );
-
     Ok(appsrc.upcast::<gst::Element>())
 }

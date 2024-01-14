@@ -5,7 +5,10 @@ use gstreamer as gst;
 use gstreamer_app as gst_app;
 use log::*;
 use std::{
-    sync::{Arc, Mutex},
+    sync::{
+        atomic::{AtomicU32, Ordering},
+        Arc, Mutex,
+    },
     time::Instant,
 };
 
@@ -57,11 +60,10 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
         ])
         .unwrap();
 
-    // link video source to mpegtsmux
-    //videosrc.link_filtered(&x264enc, &videosrc_caps).unwrap();
     videosrc.link(&x264enc).unwrap();
     x264enc.link(&h264parse).unwrap();
     h264parse.link(&mpegtsmux).unwrap();
+    // h264 video and KLV stream are both linked to mpegtsmux which muxes them together.
     appsrc
         .link_filtered(
             &mpegtsmux,
@@ -71,19 +73,25 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
         )
         .unwrap();
 
+    // For demonstration purposes `tsdemux` takes video stream and klv stream again apart.
     mpegtsmux.link(&tsdemux).unwrap();
-    //mpegtsmux.set_property("alignment", 7);
 
-    // link display pipe
+    // Link display pipe.
     gst::Element::link_many(&[&h264parse_dest, &avdec_h264, &videoconvert, &videosink]).unwrap();
     let h264_sink_pad = h264parse_dest
         .static_pad("sink")
         .expect("h264 could not be linked.");
 
+    let klv_sink_pad = appsink.static_pad("sink").unwrap();
+    let video_sink_pad = videosink.static_pad("sink").unwrap();
+
     // Pipeline can be disposed of at any point (), so convert to a weak ref that will force us to check if there is any strong reference
     // using `pipeline_weak.upgrade()` below
     let pipeline_weak = pipeline.downgrade();
-    // Demuxer needs to connect after playing (detect source)
+
+    // Demuxer needs to connect after playing (detect source).
+    // It will create 2 srce pads: one for video and another for KLV metadata.
+    // KLV src pad is connected to `appsink` through a `queue` element.
     tsdemux.connect_pad_added(move |src, src_pad| {
         if src_pad.name().contains("video") {
             info!(
@@ -102,17 +110,21 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
                 Some(pipeline) => pipeline,
                 None => return,
             };
+
             let queue = gst::ElementFactory::make("queue").build().unwrap();
+            //queue.set_property_from_str("max-size-buffers", "1");
+            appsink.set_property_from_str("sync", "false");
+
             let elements = &[&queue, &appsink];
             pipeline
                 .add_many(elements)
-                .expect("failed to add audio elements to pipeline");
+                .expect("failed to add elements to pipeline");
             gst::Element::link_many(elements).unwrap();
-
             let appsink_pad = queue
                 .static_pad("sink")
                 .expect("failed to get queue and appsink pad.");
             src_pad.link(&appsink_pad).unwrap();
+
             for e in elements {
                 e.sync_state_with_parent().unwrap();
             }
@@ -125,10 +137,13 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
         }
     });
 
-    let srcpad = videosrc.static_pad("src").unwrap();
+    let video_src_pad = videosrc.static_pad("src").unwrap();
     let ts = Arc::new(Mutex::new(Instant::now()));
+    let frame_nr = AtomicU32::new(0);
 
-    srcpad.add_probe(gst::PadProbeType::DATA_DOWNSTREAM, move |_, probe_info| {
+    // This is called evertime when new video frame is produced by videosrc.
+    // Here KLV data is pushed to appsrc buffer.
+    video_src_pad.add_probe(gst::PadProbeType::DATA_DOWNSTREAM, move |_, probe_info| {
         match probe_info.data {
             Some(gst::PadProbeData::Event(ref event)) => {
                 info!("Event {:?}", event);
@@ -138,23 +153,25 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
                 let mut ts = ts.lock().unwrap();
                 let frame_time_ms = (now - *ts).as_micros() as f32 / 1000.;
                 *ts = now;
-                let fram_time = buf.pts();
-
-                if frame_time_ms > 35. {
-                    warn!("frame {:?} {}", fram_time, frame_time_ms);
-                } else {
-                    info!("frame {:?} {}", fram_time, frame_time_ms);
-                }
+                let frame_time = buf.pts();
 
                 // Example KLV set taken from: https://en.wikipedia.org/wiki/KLV#Example
                 let data = [0x2A, 0x02, 0x00, 0x03];
+                let nr = frame_nr.fetch_add(1, Ordering::SeqCst);
+                let data = nr.to_le_bytes();
+
+                if frame_time_ms > 35. {
+                    error!("src frame {:?} {} {:?}", frame_time, frame_time_ms, data);
+                } else {
+                    warn!("src frame {:?} {} {:?}", frame_time, frame_time_ms, data);
+                }
 
                 if let Some(appsrc) = appsrc.downcast_ref::<gst_app::AppSrc>() {
                     let mut buffer = gst::Buffer::with_size(data.len()).unwrap();
                     {
                         let bufref = buffer.make_mut();
-                        bufref.set_pts(fram_time);
-                        bufref.set_dts(buf.dts());
+                        bufref.set_pts(frame_time);
+                        //bufref.set_dts(buf.dts());
 
                         let mut mw = bufref.map_writable().unwrap();
                         mw.as_mut_slice().copy_from_slice(&data)
@@ -164,6 +181,33 @@ fn video_with_klv() -> Result<gst::Pipeline, Error> {
                 } else {
                     error!("Failed to downcast appsrc to gst_app::AppSrc");
                 }
+            }
+            _ => (),
+        }
+        gst::PadProbeReturn::Ok
+    });
+
+    klv_sink_pad.add_probe(gst::PadProbeType::DATA_DOWNSTREAM, move |_, probe_info| {
+        match probe_info.data {
+            Some(gst::PadProbeData::Event(ref event)) => {
+                info!("Event {:?}", event);
+            }
+            Some(gst::PadProbeData::Buffer(ref buf)) => {
+                let mr = buf.map_readable().unwrap();
+                log::info!("klvprobe klv {:?} {:?}", buf.pts(), mr.as_slice());
+            }
+            _ => (),
+        }
+        gst::PadProbeReturn::Ok
+    });
+
+    video_sink_pad.add_probe(gst::PadProbeType::DATA_DOWNSTREAM, move |_, probe_info| {
+        match probe_info.data {
+            Some(gst::PadProbeData::Event(ref event)) => {
+                info!("Event {:?}", event);
+            }
+            Some(gst::PadProbeData::Buffer(ref buf)) => {
+                log::info!("video sink {:?} ", buf.pts());
             }
             _ => (),
         }
