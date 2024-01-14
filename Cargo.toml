@@ -11,6 +11,9 @@ anyhow = "1.0"
 gstreamer = "0.21.2"
 gstreamer-video = "0.21.2"
 gstreamer-app = "0.21.2"
+pango = { git = "https://github.com/gtk-rs/gtk-rs-core", branch = "0.18", version = "0.18" }
+cairo-rs = { git = "https://github.com/gtk-rs/gtk-rs-core", branch = "0.18", version = "0.18", features=["use_glib"]}
+pangocairo = { git = "https://github.com/gtk-rs/gtk-rs-core", branch = "0.18", version = "0.18" }
 derive_more = "0.99.5"
 
 [target.'cfg(target_os = "macos")'.dependencies]
